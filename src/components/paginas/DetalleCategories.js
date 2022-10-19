@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useEffect } from 'react';
 import * as Yup from 'yup';
 
-const DeatlleUsuarios = (   ) => {
+const DetalleCategories = (   ) => {
    const [mensaje, guardarMensaje] = useState(null);
 
    // Mutation para crear nuevos usuarios en apollo
@@ -12,17 +13,15 @@ const DeatlleUsuarios = (   ) => {
    const formik = useFormik({
        initialValues: {
            name: '',
-           email: '',
-           password: '',
-           age: ''
+           description: ''
        }, 
        onSubmit: async valores => {
            // console.log(valores);
            const { nombre, hotel, stars, description } = valores;
-           fetch('http://158.101.4.76:8080/api/Client/save',{
-                method: 'POST',
-                body: JSON.stringify(valores),
-                headers: new Headers({'content-type': 'application/json'})
+           fetch('http://158.101.4.76:8080/api/Category/save',{
+            method: 'POST',
+            body: JSON.stringify(valores),
+            headers: new Headers({'content-type': 'application/json'})
            })
        
        }
@@ -53,51 +52,23 @@ const DeatlleUsuarios = (   ) => {
                     placeholder="Nombre"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    value={formik.values.email}
                 />
             </div>
 
             <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                    Email
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                    Descripcion
                 </label>
 
                 <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="email"
-                    type="email"
-                    placeholder="Email"
+                    id="description"
+                    type="description"
+                    placeholder="Descripcion"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                />
-            </div>
-
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                    Password
-                </label>
-
-                <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password"
-                    type="password"
-                    placeholder="Password"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
-            </div>
-
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="age">
-                    Edad
-                </label>
-
-                <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="age"
-                    type="age"
-                    placeholder="Edad"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                    value={formik.values.password}
                 />
             </div>
 
@@ -115,4 +86,4 @@ const DeatlleUsuarios = (   ) => {
      );
 }
  
-export default DeatlleUsuarios;
+export default DetalleCategories;
